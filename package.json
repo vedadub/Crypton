@@ -1,0 +1,22 @@
+{
+  "name": "crypton",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "repository": "https://github.com/CryptonDev/Crypton.git",
+  "license": "MIT",
+  "scripts": {
+    "start": "node .",
+    "predev": "rm -rf dist && node scripts/predev.js",
+    "dev": "tsc && node .",
+    "prebuild": "rm -rf dist && node scripts/prebuild.js",
+    "build": "tsc",
+    "postbuild": "node scripts/postbuild.js"
+  },
+  "dependencies": {
+    "@sapphire/framework": "^2.0.0-next.4a3c76a6.0",
+    "discord.js": "^13.0.0-dev.5ca97c9.1626480265"
+  },
+  "devDependencies": {
+    "typescript": "^4.3.5"
+  }
+}
