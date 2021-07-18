@@ -11,7 +11,9 @@ class OnReady extends Listener {
     }
 
     async run() {
-        this.container.logger.info("Bot has started!")
+        const {client,logger} = this.container;
+        logger.info("Bot has started!")
+        
     }
 }
 

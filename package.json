@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@sapphire/framework": "^2.0.0-next.4a3c76a6.0",
+    "@types/node-fetch": "^2.5.11",
     "discord.js": "^13.0.0-dev.5ca97c9.1626480265"
   },
   "devDependencies": {
