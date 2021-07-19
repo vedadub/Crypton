@@ -1,13 +1,13 @@
-import { readFileSync } from "fs";
+import { readFileSync } from 'fs';
 
 const setupEnv = (): boolean => {
-	readFileSync(".env")
+	readFileSync('.env')
 		.toString()
-		.split("\n")
+		.split('\n')
 		.forEach(line => {
-			const [key, value] = line.split("=");
+			const [key, value] = line.split('=');
 			process.env[key] = value;
-		}
+		},
 		);
 	return true;
 };
