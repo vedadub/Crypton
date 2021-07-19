@@ -9,7 +9,7 @@ class OnReady extends Listener {
 			once: true,
 		});
 	}
-
+  
 	run(): void {
 		this.container.logger.info("Bot has started!");
 	}
