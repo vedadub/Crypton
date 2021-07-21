@@ -1,4 +1,4 @@
-import { Command, PieceContext } from '@sapphire/framework';
+﻿import { Command, PieceContext } from '@sapphire/framework';
 import { Message, MessageEmbed } from 'discord.js';
 import { EmbedColors } from '../../configs/enums';
 import fetch from 'node-fetch';
@@ -18,20 +18,15 @@ class Meme extends Command {
 
 	async run(message: Message) {
 		const response = await (await fetch('https://meme-api.herokuapp.com/gimme/memes/2')).json();
-		const memesArray:MemeResponse[] = response.memes;
-		let memeData:MemeResponse;
-		if(memesArray[0].nsfw === true) {
-			memeData = memesArray[1];
-		}
-		else {
-			memeData = memesArray[0];
-		}
-		const memeEmbed:MessageEmbed = new MessageEmbed()
+		const memesArray: MemeResponse[] = response.memes.filter((meme: MemeResponse) => meme.nsfw === false);
+		const memeData: MemeResponse = memesArray[0];
+		const memeEmbed: MessageEmbed = new MessageEmbed()
 			.setColor(EmbedColors.INVISIBLE)
 			.setAuthor(`${message.client.user?.username || 'Crypton'} Memes`)
 			.setImage(memeData.url)
 			.setDescription(`**[${memeData.title}](${memeData.url})**`)
-			.setFooter(`👍 ${memeData.ups} | We are Not Responsible if the meme is controversial`);
+			.setFooter(`👍 ${memeData.ups}`)
+			.setTimestamp();
 		message.channel.send({ embeds:[memeEmbed] });
 	}
 }
