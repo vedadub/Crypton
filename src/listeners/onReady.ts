@@ -1,4 +1,5 @@
 import { Listener, PieceContext } from '@sapphire/framework';
+import * as mongoose from 'mongoose';
 /**
  * Logs when the bot is ready to start
  */
@@ -10,8 +11,21 @@ class OnReady extends Listener {
 		});
 	}
 
-	run(): void {
+	async run(): Promise<void> {
 		this.container.logger.info('Bot has started!');
+
+		if (process.env.MONGO_URL) {
+			await mongoose.connect(process.env.MONGO_URL, {
+				keepAlive: true,
+				useNewUrlParser: true,
+				useUnifiedTopology: true,
+				useFindAndModify: false,
+			});
+		}
+		else {
+			throw new Error('You Need DB to Run This Bot');
+		}
+		console.log(mongoose.connection.readyState);
 	}
 }
 
