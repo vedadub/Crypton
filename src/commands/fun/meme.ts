@@ -19,7 +19,7 @@ class Meme extends Command {
 	async run(message: Message) {
 		const response = await (await fetch('https://meme-api.herokuapp.com/gimme/memes/2')).json();
 		const memesArray: MemeResponse[] = response.memes.filter((meme: MemeResponse) => meme.nsfw === false);
-		let memeData: MemeResponse = memesArray[0];
+		const memeData: MemeResponse = memesArray[0];
 		const memeEmbed: MessageEmbed = new MessageEmbed()
 			.setColor(EmbedColors.INVISIBLE)
 			.setAuthor(`${message.client.user?.username || 'Crypton'} Memes`)
