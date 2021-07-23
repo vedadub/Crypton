@@ -1,14 +1,17 @@
 {
   "name": "crypton",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": ".crypton/index.js",
   "repository": "https://github.com/CryptonDev/Crypton.git",
   "license": "MIT",
   "scripts": {
     "start": "node .",
-    "predev": "rm -rf dist && node scripts/predev.js",
+    "predev": "rm -rf .crypton && node scripts/predev.js",
     "dev": "tsc && node .",
-    "prebuild": "rm -rf dist && node scripts/prebuild.js",
+    "watch": "tsc -w",
+    "lint": "yarn eslint .",
+    "lint:fix": "yarn eslint . --fix",
+    "prebuild": "rm -rf .crypton && node scripts/prebuild.js",
     "build": "tsc",
     "postbuild": "node scripts/postbuild.js"
   },

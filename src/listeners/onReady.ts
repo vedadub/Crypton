@@ -22,10 +22,6 @@ class OnReady extends Listener {
 				useFindAndModify: false,
 			});
 		}
-		else {
-			throw new Error('You Need DB to Run This Bot');
-		}
-		console.log(mongoose.connection.readyState);
 	}
 }
 
