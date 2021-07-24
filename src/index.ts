@@ -1,16 +1,19 @@
 import { SapphireClient } from '@sapphire/framework';
 import { Intents } from 'discord.js';
-import setupEnv from './utils/setupEnv';
+// import setupEnv from './utils/setupEnv';
+import * as dotenv from 'dotenv';
 
 // Setup env using custom script
-setupEnv();
+// setupEnv();
+dotenv.config();
 
 /**
  * The client made using SapphireClient
  * @type {SapphireClient}
  */
 const client: SapphireClient = new SapphireClient({
-	intents: [ Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILDS ],
+	intents: [ Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES,
+	],
 	defaultPrefix: '?',
 	caseInsensitiveCommands: true,
 	caseInsensitivePrefixes: true,

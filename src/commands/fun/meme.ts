@@ -17,13 +17,9 @@ class Meme extends Command {
 	}
 
 	async run(message: Message) {
-
-		// Returns 10 memes from the API, which would give a 99.90% chance of getting a non-NSFW meme
-		const response = await (await fetch('https://meme-api.herokuapp.com/gimme/memes/5')).json();
-
-		// The first non-NSFW meme found from the list
-		const memeData: MemeResponse = response.memes.find((meme: MemeResponse) => !meme.nsfw);
-
+		const response = await (await fetch('https://meme-api.herokuapp.com/gimme/wholesomememes/3')).json();
+		const memesArray: MemeResponse[] = response.memes.filter((meme: MemeResponse) => meme.nsfw === false);
+		const memeData: MemeResponse = memesArray[0];
 		const memeEmbed: MessageEmbed = new MessageEmbed()
 			.setColor(EmbedColors.INVISIBLE)
 			.setAuthor(`${message.client.user?.username || 'Crypton'} Memes`)
@@ -31,8 +27,7 @@ class Meme extends Command {
 			.setDescription(`**[${memeData.title}](${memeData.url})**`)
 			.setFooter(`👍 ${memeData.ups}`)
 			.setTimestamp();
-
-		message.channel.send({ embeds:[memeEmbed] });
+		message.reply({ embeds:[memeEmbed] });
 	}
 }
 
