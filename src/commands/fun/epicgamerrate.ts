@@ -1,7 +1,7 @@
 import { Command, PieceContext } from '@sapphire/framework';
 import { Message } from 'discord.js';
 
-class ball extends Command {
+class epic extends Command {
 	constructor(context:PieceContext) {
 		super(context, {
 			name: '8ball',
@@ -16,4 +16,4 @@ class ball extends Command {
 	}
 }
 
-export default ball;
+export default epic;

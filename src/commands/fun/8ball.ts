@@ -10,7 +10,7 @@ class ball extends Command {
 		});
 	}
 	async run(message: Message) : Promise<void> {
-		const answers = ['Absolutely', 'LOL no', 'Maybe', 'Sure', 'I mean yes-', 'Absolutely no', 'Are you crazy? no right?', 'Is sun yellow? yes right?', 'Is moon black? NO!'];
+		const answers = ['Absolutely', 'LOL no', 'Maybe', 'Sure', 'I mean yes-', 'Absolutely no', 'Shut up, no', 'I gotta agree on that one', 'Bruh I\'m too busy'];
 		const answer = answers[Math.floor(Math.random() * answers.length)];
 		message.channel.send(answer);
 	}
