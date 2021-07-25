@@ -1,19 +1,24 @@
-import { Command, PieceContext } from '@sapphire/framework';
+import { Args, Command, PieceContext } from '@sapphire/framework';
 import { Message } from 'discord.js';
 
-class ball extends Command {
+class epic extends Command {
 	constructor(context:PieceContext) {
 		super(context, {
-			name: '8ball',
-			aliases: ['ball'],
-			description: '8ball lol',
+			name: 'epicgamerrate',
+			aliases: ['Epic'],
+			description: 'epiccc',
 		});
 	}
-	async run(message: Message) : Promise<void> {
-		const answers = ['Absolutely', 'LOL no', 'Maybe', 'Sure', 'I mean yes-', 'Absolutely no', 'Are you crazy? no right?', 'Is sun yellow? yes right?', 'Is moon black? NO!'];
-		const answer = answers[Math.floor(Math.random() * answers.length)];
-		message.channel.send(answer);
+	async run(message: Message, args: Args) : Promise<void> {
+		const user = await args.pick('user').catch(()=>message.author);
+		const answer = Math.floor(Math.random() * 100);
+		if (user) {
+			message.channel.send(`${user.username} is ${answer}%  Epicgamer :sunglasses:!`);
+		}
+		else {
+			message.channel.send(`You are ${answer}% Epicgamer :sunglasses:!`);
+		}
 	}
 }
 
-export default ball;
+export default epic;
