@@ -14,7 +14,10 @@ class VoiceStateUpdate extends Listener {
 	async run(oldState:VoiceState, newState:VoiceState): Promise<void> {
 		/* Voice Ranking */
 		const voiceRanking = new VoiceRanking();
-		voiceRanking.startReadingTime(oldState, newState);
+		if((newState.channel?.id || oldState.channel?.id) != newState.guild.afkChannelId) {
+			voiceRanking.startReadingTime(oldState, newState);
+		}
+
 	}
 }
 

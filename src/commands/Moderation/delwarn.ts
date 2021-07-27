@@ -1,6 +1,6 @@
 import { Args, Command, PieceContext } from '@sapphire/framework';
 import { Message, MessageEmbed } from 'discord.js';
-import { EmbedColors } from '../../configs/enums';
+import { EmbedColors } from '../../configs/constants';
 import warningSchema from '../../models/warningsSchema';
 import { deleteMessage } from '../../utils/functions';
 import { Warn, WarningDBResponse } from '../../types/warningDBResponse';

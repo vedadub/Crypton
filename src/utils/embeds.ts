@@ -1,5 +1,5 @@
-import { Message, MessageEmbed } from 'discord.js';
-import { EmbedColors } from '../configs/enums';
+import { Message, MessageEmbed, User } from 'discord.js';
+import { EmbedColors } from '../configs/constants';
 import { deleteMessage } from './functions';
 
 
@@ -37,4 +37,20 @@ export const actionOnYourself = async (action:string, message:Message):Promise<v
 		.setColor(EmbedColors.ERROR);
 	const actionOnYourselfMessage = await message.reply({ embeds:[actionOnYourselfEmbed] });
 	deleteMessage(actionOnYourselfMessage, 3000);
+};
+
+export const cannotTakeActionLackPerms = async (message:Message) =>{
+	const cannotTakeActionLackPermsEmbed = new MessageEmbed()
+		.setDescription('<:CryptonError:814768294795411457> I cannot take this action due to lack of permissions.')
+		.setColor(EmbedColors.ERROR);
+	const actionOnYourselfMessage = await message.reply({ embeds:[cannotTakeActionLackPermsEmbed] });
+	deleteMessage(actionOnYourselfMessage, 3000);
+	return;
+};
+
+export const tookActionOnUser = async (message:Message, action:string, reason:string, user?:User)=>{
+	const tookActionOnUserEmbed = new MessageEmbed()
+		.setColor(EmbedColors.SUCCESS)
+		.setDescription(`<:CryptonSuccess:814768294849675264> **${user?.tag} was ${action} | ${reason}**`);
+	message.reply({ embeds:[tookActionOnUserEmbed] });
 };

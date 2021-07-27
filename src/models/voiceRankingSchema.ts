@@ -15,6 +15,11 @@ const voiceRankingSchema = new Schema({
 		required:true,
 		default:0,
 	},
+	lifeTime:{
+		type:Number,
+		required:true,
+		default:0,
+	},
 	level:{
 		type:Number,
 		required:true,
