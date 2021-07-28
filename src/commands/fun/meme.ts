@@ -1,6 +1,6 @@
 ﻿import { Command, PieceContext } from '@sapphire/framework';
 import { Message, MessageEmbed } from 'discord.js';
-import { EmbedColors } from '../../configs/enums';
+import { EmbedColors } from '../../configs/constants';
 import fetch from 'node-fetch';
 import MemeResponse from '../../types/MemeResponse';
 /**

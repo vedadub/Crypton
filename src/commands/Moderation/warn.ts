@@ -1,7 +1,7 @@
 import { Command, PieceContext, Args } from '@sapphire/framework';
 import { Message, MessageEmbed } from 'discord.js';
 import { generateRandomString, deleteMessage } from '../../utils/functions';
-import { EmbedColors } from '../../configs/enums';
+import { EmbedColors } from '../../configs/constants';
 import warningSchema from '../../models/warningsSchema';
 import { Warn } from '../../types/warningDBResponse';
 import { error, mentionAValidUser, noRequiredPermissions, actionOnYourself } from '../../utils/embeds';

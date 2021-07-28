@@ -1,6 +1,6 @@
 import { Args, Command, PieceContext } from '@sapphire/framework';
 import { Message, MessageEmbed, Util } from 'discord.js';
-import { EmbedColors } from '../../configs/enums';
+import { EmbedColors } from '../../configs/constants';
 /**
  * Sends the ping of the bot to the user.
  */

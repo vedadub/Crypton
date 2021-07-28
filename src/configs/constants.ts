@@ -7,3 +7,5 @@ export enum EmbedColors {
     // Discord Green Color (#43b582)
     SUCCESS=4437378,
 }
+
+export const cooldownModerationCommands = 3000;
