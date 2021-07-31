@@ -5,7 +5,8 @@
 	},
 	"extends": [
 		"eslint:recommended",
-		"plugin:@typescript-eslint/recommended"
+		"plugin:@typescript-eslint/recommended",
+		"prettier"
 	],
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
@@ -34,7 +35,7 @@
 		"no-multi-spaces": "error",
 		"no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1, "maxBOF": 0 }],
 		"no-shadow": ["error", { "allow": ["err", "resolve", "reject"] }],
-		"no-trailing-spaces": ["error"],
+		"no-trailing-spaces": ["off"],
 		"no-var": "error",
 		"object-curly-spacing": ["error", "always"],
 		"prefer-const": "error",
@@ -51,6 +52,8 @@
 		"space-unary-ops": "error",
 		"spaced-comment": "error",
 		"@typescript-eslint/explicit-module-boundary-types": "off",
+		"@typescript-eslint/no-non-null-assertion": "off",
+		"@typescript-eslint/no-explicit-any": "off",
 		"yoda": "error"
 	}
 }

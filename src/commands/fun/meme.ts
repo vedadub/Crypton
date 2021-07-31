@@ -1,6 +1,6 @@
 ﻿import { Command, PieceContext } from '@sapphire/framework';
 import { Message, MessageEmbed } from 'discord.js';
-import { EmbedColors } from '../../configs/constants';
+import { EmbedColors } from '../../types/constants';
 import fetch from 'node-fetch';
 import MemeResponse from '../../types/MemeResponse';
 /**
@@ -17,8 +17,12 @@ class Meme extends Command {
 	}
 
 	async run(message: Message) {
-		const response = await (await fetch('https://meme-api.herokuapp.com/gimme/wholesomememes/3')).json();
-		const memesArray: MemeResponse[] = response.memes.filter((meme: MemeResponse) => meme.nsfw === false);
+		const response = await (
+			await fetch('https://meme-api.herokuapp.com/gimme/wholesomememes/3')
+		).json();
+		const memesArray: MemeResponse[] = response.memes.filter(
+			(meme: MemeResponse) => meme.nsfw === false,
+		);
 		const memeData: MemeResponse = memesArray[0];
 		const memeEmbed: MessageEmbed = new MessageEmbed()
 			.setColor(EmbedColors.INVISIBLE)
@@ -27,7 +31,7 @@ class Meme extends Command {
 			.setDescription(`**[${memeData.title}](${memeData.url})**`)
 			.setFooter(`👍 ${memeData.ups}`)
 			.setTimestamp();
-		message.reply({ embeds:[memeEmbed] });
+		message.reply({ embeds: [memeEmbed] });
 	}
 }
 

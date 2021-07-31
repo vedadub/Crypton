@@ -1,6 +1,5 @@
-import { Args, Command, PieceContext } from '@sapphire/framework';
-import { Message, MessageEmbed, Util } from 'discord.js';
-import { EmbedColors } from '../../configs/constants';
+import { Command, PieceContext } from '@sapphire/framework';
+// import { Message } from 'discord.js';
 /**
  * Sends the ping of the bot to the user.
  */
@@ -14,7 +13,7 @@ class StealCommand extends Command {
             timestamp of your message and the timestamp of the bot message`,
 		});
 	}
-	async run(message: Message, args:Args): Promise<void> {
+	async run() {
 		// const emojiString = args.pick('string')
 		// const emojiId = emojiString.match(/<:\w+:(\d+)>/)[1];
 		// const emojiUrl = `https://cdn.discordapp.com/emojis/${emojiId}.png?v=1`;
