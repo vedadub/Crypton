@@ -1,6 +1,6 @@
 import { Command, PieceContext } from '@sapphire/framework';
 import { Message, MessageEmbed } from 'discord.js';
-import { EmbedColors } from '../../configs/constants';
+import { EmbedColors } from '../../types/constants';
 /**
  * Sends the ping of the bot to the user.
  */
@@ -19,7 +19,15 @@ class Ping extends Command {
 			.setDescription('Calculating Ping')
 			.setColor(EmbedColors.ERROR);
 		const botMessage = await message.reply({ embeds: [pingEmbed] });
-		botMessage.edit({ embeds: [pingEmbed.setDescription(`BOT:${Math.round(message.client.ws.ping)}ms\nAPI:${botMessage.createdTimestamp - message.createdTimestamp}ms`)] });
+		botMessage.edit({
+			embeds: [
+				pingEmbed.setDescription(
+					`BOT:${Math.round(message.client.ws.ping)}ms\nAPI:${
+						botMessage.createdTimestamp - message.createdTimestamp
+					}ms`,
+				),
+			],
+		});
 	}
 }
 

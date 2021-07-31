@@ -1,10 +1,14 @@
 import { Command, PieceContext, Args } from '@sapphire/framework';
 import { Message, MessageEmbed } from 'discord.js';
-import { generateRandomString, deleteMessage } from '../../utils/functions';
-import { EmbedColors } from '../../configs/constants';
-import warningSchema from '../../models/warningsSchema';
-import { Warn } from '../../types/warningDBResponse';
-import { error, mentionAValidUser, noRequiredPermissions, actionOnYourself } from '../../utils/embeds';
+import { EmbedColors } from '../../types/constants';
+import {
+	prisma,
+	mentionAValidUser,
+	noRequiredPermissions,
+	actionOnYourself,
+	generateRandomString,
+	deleteMessage,
+} from '../../utils';
 /**
  * Sends the ping of the bot to the user.
  */
@@ -15,61 +19,76 @@ class WarnCommand extends Command {
 			aliases: ['warn'],
 			description: 'Warn a user',
 			runIn: 'guild',
-			cooldownDelay:3000,
+			cooldownDelay: 3000,
 		});
 	}
 	async run(message: Message, args: Args): Promise<void> {
-		if(!message.member?.permissions.has('KICK_MEMBERS')) {
+		if (!message.member?.permissions.has('KICK_MEMBERS')) {
 			await noRequiredPermissions('KICK_MEMBERS', message);
 			return;
 		}
+
 		const { author, guild } = message;
-		const user = await args.pick('user').catch(()=>undefined);
-		const reason = await args.rest('string').catch(()=>undefined);
-		if(!user) {
+		const user = await args.pick('user').catch(() => undefined);
+		const reason = await args.rest('string').catch(() => undefined);
+
+		if (!user) {
 			await mentionAValidUser(message);
 			return;
 		}
-		if(user.id === author.id) {
+
+		if (user.id === author.id) {
 			await actionOnYourself('warn', message);
 			return;
 		}
-		if(!reason) {
-			const noReasonEmbed:MessageEmbed = new MessageEmbed()
-				.setDescription('<:CryptonError:814768294795411457> Please give a valid reason to warn a user.')
+
+		if (!guild) return;
+
+		if (!reason) {
+			const noReasonEmbed: MessageEmbed = new MessageEmbed()
+				.setDescription(
+					'<:CryptonError:814768294795411457> Please give a valid reason to warn a user.',
+				)
 				.setColor(EmbedColors.ERROR);
-			const noReasonMessage = await message.reply({ embeds:[noReasonEmbed] });
+			const noReasonMessage = await message.reply({ embeds: [noReasonEmbed] });
 			deleteMessage(noReasonMessage, 3000);
 			return;
 		}
-		const warning: Warn = {
+
+		const warning = {
 			id: generateRandomString(16),
 			moderatorId: author.id,
 			timestamp: new Date().getTime(),
-			reason:`${reason}`,
+			reason: `${reason}`,
 		};
-		await warningSchema
-			.findOneAndUpdate(
-				{
+
+		const results = await prisma.warningSchema.findFirst({
+			where: {
+				guildId: guild?.id,
+				userId: user.id,
+			},
+		});
+
+		if (!results) {
+			await prisma.warningSchema.create({
+				data: {
 					guildId: guild?.id,
 					userId: user.id,
+					warnings: [warning],
 				},
-				{
-					guildId: guild?.id,
-					userId: user.id,
-					$push: {
-						warnings: warning,
-					},
-				},
-				{
-					upsert: true,
-					new:true,
-				},
-			)
-			.catch(() => {
-				error(message);
-				return;
 			});
+			return;
+		}
+
+		await prisma.warningSchema.update({
+			where: {
+				guildId: guild?.id,
+				userId: user.id,
+			},
+			data: {
+				warnings: results.warnings.push(warning),
+			},
+		});
 
 		const successfullyWarned: MessageEmbed = new MessageEmbed()
 			.setColor(EmbedColors.SUCCESS)
@@ -77,6 +96,7 @@ class WarnCommand extends Command {
 				`<:CryptonSuccess:814768294849675264> **Successfully warned ${user?.tag}**`,
 			);
 		message.reply({ embeds: [successfullyWarned] });
+
 		const userDMEmbeb: MessageEmbed = new MessageEmbed()
 			.setColor(EmbedColors.ERROR)
 			.setDescription(
