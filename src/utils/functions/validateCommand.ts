@@ -9,10 +9,7 @@ export async function validateCommand(
 	permissionNeeded = true,
 ) {
 	if (permissionNeeded && !message?.member?.permissions.has(permission)) {
-		await noRequiredPermissions(
-			permission ? permission?.toString() : '',
-			message,
-		);
+		await noRequiredPermissions(permission ? permission?.toString() : '', message);
 		return false;
 	}
 	if (userNeeded && !user) {

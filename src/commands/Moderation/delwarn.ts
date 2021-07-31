@@ -31,9 +31,7 @@ class DeleteWarnCommand extends Command {
 		const warnId = await args.pick('string').catch(() => undefined);
 		if (!warnId) {
 			const notAValidId: MessageEmbed = new MessageEmbed()
-				.setDescription(
-					'<:CryptonError:814768294795411457> Enter a valid warn id to delete warn',
-				)
+				.setDescription('<:CryptonError:814768294795411457> Enter a valid warn id to delete warn')
 				.setColor(EmbedColors.ERROR);
 			const notAValidIdMessage = await message.reply({ embeds: [notAValidId] });
 			deleteMessage(notAValidIdMessage, 3000);

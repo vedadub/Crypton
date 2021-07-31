@@ -19,7 +19,7 @@ class ball extends Command {
 			'Absolutely no',
 			'Shut up, no',
 			'I gotta agree on that one',
-			'Bruh I\'m too busy',
+			'Bruh I am too busy',
 		];
 		const answer = answers[Math.floor(Math.random() * answers.length)];
 		message.channel.send(answer);
