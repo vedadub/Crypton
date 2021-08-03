@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-shadow
+/* eslint-disable no-shadow */
 export enum EmbedColors {
 	// Discord Background color (#2F3136)
 	INVISIBLE = 3092790,
