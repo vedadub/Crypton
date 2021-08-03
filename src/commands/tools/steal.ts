@@ -1,22 +1,31 @@
-import { Command, PieceContext } from '@sapphire/framework';
-// import { Message } from 'discord.js';
+import { Command, PieceContext, Args } from '@sapphire/framework';
+import { Message } from 'discord.js';
 /**
  * Sends the ping of the bot to the user.
  */
 class StealCommand extends Command {
 	constructor(context: PieceContext) {
 		super(context, {
-			name: 'ping',
-			aliases: ['beep'],
-			description: 'Sends your ping',
-			detailedDescription: `The ping is the difference between the
-            timestamp of your message and the timestamp of the bot message`,
+			name: 'steal',
+			description: 'steals an emoji',
 		});
 	}
-	async run() {
-		// const emojiString = args.pick('string')
-		// const emojiId = emojiString.match(/<:\w+:(\d+)>/)[1];
-		// const emojiUrl = `https://cdn.discordapp.com/emojis/${emojiId}.png?v=1`;
+	async run(message: Message, args: Args) {
+		const emojiString = await args.pick('string').catch(() => undefined);
+		
+		if (!emojiString) return this.notFound(message);
+
+		const regexEmojiString = emojiString.match(/<:\w+:(\d+)>/);
+
+		if (!regexEmojiString) return this.notFound(message);
+
+		const emojiId = emojiString[1];
+		const emojiUrl = `https://cdn.discordapp.com/emojis/${emojiId}.png?v=1`;
+		message.reply(emojiUrl);
+	}
+
+	private notFound(message: Message) {
+		message.reply('Emoji not found!');
 	}
 }
 

@@ -14,7 +14,8 @@ class Ping extends Command {
             timestamp of your message and the timestamp of the bot message`,
 		});
 	}
-	async run(message: Message): Promise<void> {
+	async run(message: Message) {
+
 		const pingEmbed: MessageEmbed = new MessageEmbed()
 			.setDescription('Calculating Ping')
 			.setColor(EmbedColors.ERROR);

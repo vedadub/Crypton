@@ -13,7 +13,7 @@
     },
     "include": [
         "src/**/*"
-    ],
+, "src/types/sapphire.d.ts"    ],
     "buildOptions": {
         "verbose": true
     }
