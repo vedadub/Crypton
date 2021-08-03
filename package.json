@@ -9,8 +9,8 @@
     "start": "node .",
     "dev": "tsc && node .",
     "watch": "tsc -w",
-    "lint": "prettier --check src && yarn eslint src",
-    "lint:fix": "yarn eslint src --fix && yarn prettier --write src",
+    "lint": " yarn eslint src && echo 'Linting Completed!'",
+    "lint:fix": "yarn eslint src --fix && echo 'Linting Completed!'",
     "refresh": "yarn prisma generate",
     "build": "rm -rf .crypton && tsc"
   },
@@ -19,7 +19,8 @@
     "@sapphire/framework": "^2.0.0-next.4a3c76a6.0",
     "@sapphire/plugins-interactions": "github:sapphiredev/interactions",
     "discord.js": "^13.0.0-dev.t1627689836.ee3cdc8",
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "eslint-plugin-prettier": "^3.4.0"
   },
   "devDependencies": {
     "@types/node-fetch": "^2.5.11",

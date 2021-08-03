@@ -12,7 +12,7 @@ class StealCommand extends Command {
 	}
 	async run(message: Message, args: Args) {
 		const emojiString = await args.pick('string').catch(() => undefined);
-		
+
 		if (!emojiString) return this.notFound(message);
 
 		const regexEmojiString = emojiString.match(/<:\w+:(\d+)>/);

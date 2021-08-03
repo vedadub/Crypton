@@ -15,7 +15,6 @@ class Ping extends Command {
 		});
 	}
 	async run(message: Message) {
-
 		const pingEmbed: MessageEmbed = new MessageEmbed()
 			.setDescription('Calculating Ping')
 			.setColor(EmbedColors.ERROR);
