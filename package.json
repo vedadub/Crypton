@@ -10,10 +10,10 @@
     "dev": "tsc && node .",
     "watch": "tsc -w",
     "lint": "prettier --check src && yarn eslint src",
-    "lint:fix": "yarn prettier --write src && yarn eslint src --fix",
+    "lint:fix": "yarn eslint src --fix && yarn prettier --write src",
+    "refresh": "yarn prisma generate",
     "prebuild": "rm -rf .crypton && node scripts/prebuild.js",
-    "build": "tsc",
-    "postbuild": "node scripts/postbuild.js"
+    "build": "tsc"
   },
   "dependencies": {
     "@prisma/client": "^2.28.0",

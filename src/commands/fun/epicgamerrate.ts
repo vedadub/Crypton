@@ -13,11 +13,8 @@ class epic extends Command {
 		const user = await args.pick('user').catch(() => message.author);
 		const answer = Math.floor(Math.random() * 100);
 		if (user) {
-			message.channel.send(
-				`${user.username} is ${answer}%  Epicgamer :sunglasses:!`,
-			);
-		}
-		else {
+			message.channel.send(`${user.username} is ${answer}%  Epicgamer :sunglasses:!`);
+		} else {
 			message.channel.send(`You are ${answer}% Epicgamer :sunglasses:!`);
 		}
 	}

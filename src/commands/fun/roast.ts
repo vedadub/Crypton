@@ -25,8 +25,8 @@ class roast extends Command {
 			'Normie be like',
 			'Sup edot',
 			'Man you should see a mental doctor',
-			'I\'m calling FBI now',
-			'I\' gotta say you\'re pretty dumb',
+			'I am calling FBI now',
+			'I gotta say you are pretty dumb',
 		];
 		const answer = answers[Math.floor(Math.random() * answers.length)];
 

@@ -92,16 +92,12 @@ class WarnCommand extends Command {
 
 		const successfullyWarned: MessageEmbed = new MessageEmbed()
 			.setColor(EmbedColors.SUCCESS)
-			.setDescription(
-				`<:CryptonSuccess:814768294849675264> **Successfully warned ${user?.tag}**`,
-			);
+			.setDescription(`<:CryptonSuccess:814768294849675264> **Successfully warned ${user?.tag}**`);
 		message.reply({ embeds: [successfullyWarned] });
 
 		const userDMEmbeb: MessageEmbed = new MessageEmbed()
 			.setColor(EmbedColors.ERROR)
-			.setDescription(
-				`You were warned in ${guild?.name} | **Reason: ${reason}**`,
-			);
+			.setDescription(`You were warned in ${guild?.name} | **Reason: ${reason}**`);
 		user.send({ embeds: [userDMEmbeb] }).catch();
 	}
 }

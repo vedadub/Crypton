@@ -34,9 +34,7 @@ class WarnCommand extends Command {
 		if (!results || !results.warnings.length) {
 			const noWarnings = new MessageEmbed()
 				.setColor(EmbedColors.INVISIBLE)
-				.setDescription(
-					`<:CryptonInfo:868051794633306154> No warns for ${user?.tag}`,
-				);
+				.setDescription(`<:CryptonInfo:868051794633306154> No warns for ${user?.tag}`);
 			message.reply({ embeds: [noWarnings] });
 			return;
 		}
