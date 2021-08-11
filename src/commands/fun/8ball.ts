@@ -3,18 +3,18 @@ import { CommandInteraction } from 'discord.js';
 
 const command = new Command({
 	name: '8ball',
-	description: '8ball lol',
+	description: 'An eight ball command that does random things',
 	async run(interaction: CommandInteraction) {
 		const answers = [
 			'Absolutely',
-			'LOL no',
+			'no',
 			'Maybe',
 			'Sure',
-			'I mean yes-',
-			'Absolutely no',
-			'Shut up, no',
+			'Yes',
+			'Alright thats just not',
+			'Shut up, he is kinda correct',
 			'I gotta agree on that one',
-			'Bruh I am too busy',
+			'Too busy for that one',
 		];
 		const answer = answers[Math.floor(Math.random() * answers.length)];
 		interaction.editReply(answer);

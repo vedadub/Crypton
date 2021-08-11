@@ -7,12 +7,35 @@ const onInteraction = new Event({
 	once: false,
 	async run(interaction: Interaction, client: CryptonClient) {
 		if (!interaction.isCommand()) return;
-		if (!client.commands.has(interaction.commandName)) return;
+
+		const command = client.commands.get(interaction.commandName);
+
+		if (!command) return;
 		
 		await interaction.deferReply();
 
+		const args: any = {};
+
+		if (command.options) {
+			command.options.forEach(option => {
+				const type = option.type;
+				let optionValue: any = interaction.options.get(option.name);
+				if (!optionValue) return;
+				if (type === 'USER') {
+					optionValue = interaction.options.getMember(option.name);
+				} else {
+					optionValue = optionValue.value;
+				}
+				args[option.name] = optionValue;
+			});
+			const subcommand = interaction.options.getSubcommand(false);
+			if (subcommand) args['subcommand'] = subcommand;
+		};
+
+		console.log(args);
+
 		try {
-			client.commands.get(interaction.commandName)?.run(interaction, client);
+			command?.run(interaction, args, client);
 		} catch (err) {
 			console.error(err);
 		}

@@ -7,7 +7,7 @@ const Ping = new Command({
 	name: 'ping',
 	description: 'Sends your ping',
 	run(interaction: CommandInteraction) {
-		interaction.editReply(`${interaction.client.ws.ping}`);
+		interaction.editReply(`${interaction.client.ws.ping}ms`);
 	},
 });
 

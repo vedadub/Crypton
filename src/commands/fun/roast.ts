@@ -4,8 +4,13 @@ import { CommandInteraction } from 'discord.js';
 const roast = new Command({
 	name: 'roast',
 	description: 'Roasts anyone',
-	async run(interaction: CommandInteraction) {
-		const user = interaction.user;
+	options: [{
+		name: 'user',
+		description: 'The target user',
+		type: 'USER',
+	}],
+	async run(interaction: CommandInteraction, args: any) {
+		const user = interaction.guild?.members.resolve(args.user).user || interaction.user;
 		const answers = [
 			'Sup normie?',
 			'Hey idiot',

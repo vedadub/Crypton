@@ -13,10 +13,11 @@ const OnReady = new Event({
 		client.commands.map(command => data.push({
 			name: command.name.toLowerCase(),
 			description: command.description,
+			options: command.options || [],
 		}));
 
 		client.guilds.cache.forEach(guild => {
-			guild.commands.set(data);
+			guild.commands.set(data).catch();
 		});
 	},
 });

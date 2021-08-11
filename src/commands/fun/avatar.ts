@@ -7,8 +7,13 @@ import { EmbedColors } from '../../types/constants';
 const Avatar = new Command({
 	name: 'avatar',
 	description: 'Shows the persons profile pic',
-	async run(interaction: CommandInteraction) {
-		const user = interaction.user;
+	options: [{
+		name: 'user',
+		description: 'The target user',
+		type: 'USER',
+	}],
+	async run(interaction: CommandInteraction, args: any) {
+		const user = interaction.guild?.members.resolve(args.user).user || interaction.user;
 		const userAvatar = user.displayAvatarURL({ dynamic: true, size: 256 });
 		const avatarCommandReplyEmbed: MessageEmbed = new MessageEmbed()
 			.setImage(userAvatar)
