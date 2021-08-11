@@ -6,16 +6,18 @@ const OnReady = new Event({
 	name: 'ready',
 	once: true,
 	run(client: CryptonClient) {
-		console.log('Ready!');
+		client.emit('debug', 'ready!');
 
 		const data: ApplicationCommandData[] = [];
 
 		client.commands.map(command => data.push({
-			name: command.name,
+			name: command.name.toLowerCase(),
 			description: command.description,
 		}));
 
-		client.application?.commands.set(data);
+		client.guilds.cache.forEach(guild => {
+			guild.commands.set(data);
+		});
 	},
 });
 

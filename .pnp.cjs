@@ -45,6 +45,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-prettier", "virtual:283a70b5cd83b337c92894eac5ca182a05c409ab5ecc230bb22352901d8d2f3226001da15b693695739f22b4c9997abc7c516eaaeb4bc8531d77ef020cea65a9#npm:8.3.0"],
             ["eslint-plugin-prettier", "virtual:283a70b5cd83b337c92894eac5ca182a05c409ab5ecc230bb22352901d8d2f3226001da15b693695739f22b4c9997abc7c516eaaeb4bc8531d77ef020cea65a9#npm:3.4.0"],
             ["keyv", "npm:4.0.3"],
+            ["node-fetch", "npm:2.6.1"],
             ["prettier", "npm:2.3.2"],
             ["typescript", "patch:typescript@npm%3A4.3.5#~builtin<compat/typescript>::version=4.3.5&hash=d8b4e7"]
           ],
@@ -686,6 +687,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-prettier", "virtual:283a70b5cd83b337c92894eac5ca182a05c409ab5ecc230bb22352901d8d2f3226001da15b693695739f22b4c9997abc7c516eaaeb4bc8531d77ef020cea65a9#npm:8.3.0"],
             ["eslint-plugin-prettier", "virtual:283a70b5cd83b337c92894eac5ca182a05c409ab5ecc230bb22352901d8d2f3226001da15b693695739f22b4c9997abc7c516eaaeb4bc8531d77ef020cea65a9#npm:3.4.0"],
             ["keyv", "npm:4.0.3"],
+            ["node-fetch", "npm:2.6.1"],
             ["prettier", "npm:2.3.2"],
             ["typescript", "patch:typescript@npm%3A4.3.5#~builtin<compat/typescript>::version=4.3.5&hash=d8b4e7"]
           ],

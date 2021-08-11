@@ -5,10 +5,11 @@ import { Event } from '../utils';
 const onInteraction = new Event({
 	name: 'interactionCreate',
 	once: false,
-	run(interaction: Interaction, client: CryptonClient) {
+	async run(interaction: Interaction, client: CryptonClient) {
 		if (!interaction.isCommand()) return;
-
 		if (!client.commands.has(interaction.commandName)) return;
+
+		await interaction.deferReply();
 
 		try {
 			client.commands.get(interaction.commandName)?.run(interaction, client);
