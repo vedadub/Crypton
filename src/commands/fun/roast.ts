@@ -10,7 +10,7 @@ const roast = new Command({
 		type: 'USER',
 	}],
 	async run(interaction: CommandInteraction, args: any) {
-		const user = interaction.guild?.members.resolve(args.user).user || interaction.user;
+		const user = interaction.guild?.members.resolve(args.user)?.user || interaction.user;
 		const answers = [
 			'Sup normie?',
 			'Hey idiot',

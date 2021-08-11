@@ -13,7 +13,7 @@ const Avatar = new Command({
 		type: 'USER',
 	}],
 	async run(interaction: CommandInteraction, args: any) {
-		const user = interaction.guild?.members.resolve(args.user).user || interaction.user;
+		const user = interaction.guild?.members.resolve(args.user)?.user || interaction.user;
 		const userAvatar = user.displayAvatarURL({ dynamic: true, size: 256 });
 		const avatarCommandReplyEmbed: MessageEmbed = new MessageEmbed()
 			.setImage(userAvatar)

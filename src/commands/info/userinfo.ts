@@ -13,7 +13,7 @@ const UserinfoCommand = new Command({
 		type: 'USER',
 	}],
 	async run(interaction: CommandInteraction, args: any) {
-		const user = interaction.guild?.members.resolve(args.user).user || interaction.user;
+		const user = interaction.guild?.members.resolve(args.user)?.user || interaction.user;
 		const userInfoEmbed: MessageEmbed = new MessageEmbed()
 			.setTitle(`Information About User ${user?.username}`)
 			.setThumbnail(user?.displayAvatarURL({ dynamic: true }) || '')
