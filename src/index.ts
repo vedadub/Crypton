@@ -1,28 +1,34 @@
-import { SapphireClient } from '@sapphire/framework';
-import { Intents } from 'discord.js';
 import * as dotenv from 'dotenv';
+import { Intents } from 'discord.js';
+import { readdirSync } from 'fs';
+import { CryptonClient } from './utils';
 
 dotenv.config();
 
-/**
- * The client made using SapphireClient
- * @type {SapphireClient}
- */
-const client: SapphireClient = new SapphireClient({
+const client = new CryptonClient({
 	intents: [Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES],
-	defaultPrefix: '?',
-	caseInsensitiveCommands: true,
-	caseInsensitivePrefixes: true,
 });
 
-/**
- * Color escape sequence for console.log
- */
-const redColorCode = '\x1b[31m';
-const whiteColorCode = '\x1b[0m';
+const commandFiles = readdirSync('.crypton/commands').filter((file) => file.endsWith('.js'));
+const eventFiles = readdirSync('.crypton/listeners').filter((file) => file.endsWith('.js'));
 
-// Provide the token for client and login
+for (const commandFile of commandFiles) {
+	(async () => {
+		const command = await import(`./commands/${commandFile}`);
+		client.commands.set(command.name, command);
+	})();
+}
+
+for (const eventFile of eventFiles) {
+	(async () => {
+		const event = await import(`./listeners/${eventFile}`);
+		if (event.once) {
+			client.once(event.name, (...args) => event.run(...args, client));
+		} else {
+			client.on(event.name, (...args) => event.run(...args, client));
+		}
+	})();
+}
+
 client.login(process.env.DISCORD_TOKEN);
-
-// Handle all rejections
-process.on('unhandledRejection', (err) => console.log(`${redColorCode} ${err} ${whiteColorCode}`));
+process.on('unhandledRejection', (err) => console.log(err));

@@ -1,5 +1,12 @@
-node_modules
 # Keep environment variables out of version control
 .env
 # Build
 .crypton/
+# Dependencies
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

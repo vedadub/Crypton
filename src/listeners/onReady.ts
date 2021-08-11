@@ -1,18 +1,22 @@
-import { Listener, PieceContext } from '@sapphire/framework';
-/**
- * Logs when the bot is ready to start
- */
-class OnReady extends Listener {
-	constructor(context: PieceContext) {
-		super(context, {
-			name: 'ready',
-			once: true,
-		});
-	}
+import { ApplicationCommandData } from 'discord.js';
+import { CryptonClient } from '../utils';
+import { Event } from '../utils';
 
-	async run() {
-		this.container.logger.info('Bot has started!');
-	}
-}
+const OnReady = new Event({
+	name: 'ready',
+	once: true,
+	run(client: CryptonClient) {
+		console.log('Ready!');
+
+		const data: ApplicationCommandData[] = [];
+
+		client.commands.map(command => data.push({
+			name: command.name,
+			description: command.description,
+		}));
+
+		client.application?.commands.set(data);
+	},
+});
 
 export default OnReady;

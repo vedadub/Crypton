@@ -1,17 +1,11 @@
-import { Command, PieceContext, Args } from '@sapphire/framework';
-import { Message } from 'discord.js';
+import { Command } from '../../utils';
+import { CommandInteraction } from 'discord.js';
 
-class roast extends Command {
-	constructor(context: PieceContext) {
-		super(context, {
-			name: 'roast',
-			cooldownDelay: 3000,
-			aliases: ['roast'],
-			description: 'It roasts people bruh',
-		});
-	}
-	async run(message: Message, args: Args): Promise<void> {
-		const user = await args.pick('user').catch(() => message.author);
+const roast = new Command({
+	name: 'roast',
+	description: 'Roasts anyone',
+	async run(interaction: CommandInteraction) {
+		const user = interaction.user;
 		const answers = [
 			'Sup normie?',
 			'Hey idiot',
@@ -30,8 +24,8 @@ class roast extends Command {
 		];
 		const answer = answers[Math.floor(Math.random() * answers.length)];
 
-		message.channel.send(`${user.username}, ${answer}`);
-	}
-}
+		interaction.editReply(`${user.username}, ${answer}`);
+	},
+});
 
 export default roast;

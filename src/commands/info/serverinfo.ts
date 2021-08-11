@@ -1,19 +1,12 @@
-import { Command, PieceContext } from '@sapphire/framework';
-import { Message, MessageEmbed } from 'discord.js';
+import { Command } from '../../utils';
+import { CommandInteraction, MessageEmbed } from 'discord.js';
 import { EmbedColors } from '../../types/constants';
-// import { createInvite } from '../../utils/functions/createInvite';
 
-class ServerInfo extends Command {
-	constructor(context: PieceContext) {
-		super(context, {
-			name: 'serverInfo',
-			description: 'General server information on demand',
-			aliases: ['info'],
-			runIn: 'guild',
-		});
-	}
-	async run(message: Message) {
-		const { guild } = message;
+const ServerInfo = new Command({
+	name: 'serverInfo',
+	description: 'General server information on demand',
+	async run(interaction: CommandInteraction) {
+		const { guild } = interaction;
 		let premiumTier: string;
 		switch (guild?.premiumTier) {
 			case 'TIER_1':
@@ -100,10 +93,8 @@ class ServerInfo extends Command {
 					value: `\`\`\`${guild?.features.join(', ')}\`\`\``,
 				},
 			);
-		// add this in line 56 to add Invite Link option in server info command
-		// \n:white_small_square: **Invite Link :** [Click here](${inviteLink})
-		message.reply({ embeds: [serverInfoEmbed] });
-	}
-}
+		interaction.editReply({ embeds: [serverInfoEmbed] });
+	},
+});
 
 export default ServerInfo;
