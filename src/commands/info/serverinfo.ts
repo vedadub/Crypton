@@ -3,11 +3,13 @@ import { CommandInteraction, MessageEmbed } from 'discord.js';
 import { EmbedColors } from '../../types/constants';
 
 const ServerInfo = new Command({
-	name: 'serverInfo',
+	name: 'serverinfo',
 	description: 'General server information on demand',
 	async run(interaction: CommandInteraction) {
+
 		const { guild } = interaction;
 		let premiumTier: string;
+
 		switch (guild?.premiumTier) {
 			case 'TIER_1':
 				premiumTier = `<:CryptonDPremiumL1:869131727107395615> **Level 1** with ${guild?.premiumSubscriptionCount} boosts`;
@@ -24,7 +26,7 @@ const ServerInfo = new Command({
 			default:
 				premiumTier = 'No Data';
 		}
-		// const inviteLink = await createInvite(guild);
+
 		const stats = {
 			roleCount: guild?.roles.cache.size,
 			stickerCount: guild?.stickers.cache.size,
@@ -39,6 +41,7 @@ const ServerInfo = new Command({
 			publicThreads:
 				guild?.channels.cache.filter((c) => c.type === 'GUILD_PUBLIC_THREAD').size || 'No Data',
 		};
+
 		const owner = await guild?.fetchOwner();
 		const serverInfoEmbed = new MessageEmbed()
 			.setColor(EmbedColors.INVISIBLE)

@@ -6,7 +6,7 @@ const OnReady = new Event({
 	name: 'ready',
 	once: true,
 	run(client: CryptonClient) {
-		client.emit('debug', 'ready!');
+		client.emit('debug', 'Bot has started!');
 
 		const data: ApplicationCommandData[] = [];
 

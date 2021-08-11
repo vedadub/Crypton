@@ -8,7 +8,7 @@ const onInteraction = new Event({
 	async run(interaction: Interaction, client: CryptonClient) {
 		if (!interaction.isCommand()) return;
 		if (!client.commands.has(interaction.commandName)) return;
-
+		
 		await interaction.deferReply();
 
 		try {

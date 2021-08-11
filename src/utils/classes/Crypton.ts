@@ -16,6 +16,12 @@ export class CryptonClient extends Client {
 			this.on('debug', (data) => {
 				console.log(data);
 			});
+			this.on('error', (data) => {
+				console.log(data);
+			});
+			this.on('rateLimit', (data) => {
+				console.log(data);
+			});
 		}
 
 		const commandDirectories = readdirSync('.crypton/commands');
@@ -26,8 +32,8 @@ export class CryptonClient extends Client {
 			for (const commandFile of thisDirectory) {
 				(async () => {
 					const command = await import(`../../commands/${commandDirectory}/${commandFile}`);
-					this.commands.set(command.default.name, command.default);
-					this.emit('debug', `Loaded Command: ${command.default.name}`);
+					this.commands.set(command.default.name.toLowerCase(), command.default);
+					this.emit('debug', `[Command]: Loaded ${command.default.name}`);
 				})();
 			}
 		}
@@ -40,7 +46,7 @@ export class CryptonClient extends Client {
 				} else {
 					this.on(event.default.name, (...args) => event.default.run(...args, this));
 				}
-				this.emit('debug', `Loaded Event: ${event.default.name}`);
+				this.emit('debug', `[Event]: Loaded ${event.default.name}`);
 			})();
 		}
 
