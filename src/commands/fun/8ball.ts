@@ -1,29 +1,24 @@
-import { Command, PieceContext } from '@sapphire/framework';
-import { Message } from 'discord.js';
+import { Command } from '../../utils';
+import { CommandInteraction } from 'discord.js';
 
-class ball extends Command {
-	constructor(context: PieceContext) {
-		super(context, {
-			name: '8ball',
-			aliases: ['ball'],
-			description: '8ball lol',
-		});
-	}
-	async run(message: Message): Promise<void> {
+const command = new Command({
+	name: '8ball',
+	description: 'An eight ball command that does random things',
+	async run(interaction: CommandInteraction) {
 		const answers = [
 			'Absolutely',
-			'LOL no',
+			'no',
 			'Maybe',
 			'Sure',
-			'I mean yes-',
-			'Absolutely no',
-			'Shut up, no',
+			'Yes',
+			'Alright thats just not',
+			'Shut up, he is kinda correct',
 			'I gotta agree on that one',
-			'Bruh I am too busy',
+			'Too busy for that one',
 		];
 		const answer = answers[Math.floor(Math.random() * answers.length)];
-		message.channel.send(answer);
-	}
-}
+		interaction.editReply(answer);
+	},
+});
 
-export default ball;
+export default command;

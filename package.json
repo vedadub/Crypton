@@ -3,32 +3,30 @@
   "version": "1.0.0",
   "main": ".crypton/index.js",
   "repository": "https://github.com/CryptonDev/Crypton.git",
+  "typings": "src/types",
   "license": "MIT",
   "scripts": {
-    "start": "node .",
-    "predev": "rm -rf .crypton && node scripts/predev.js",
-    "dev": "tsc && node .",
-    "watch": "tsc -w",
-    "lint": "prettier --check src && yarn eslint src",
-    "lint:fix": "yarn eslint src --fix && yarn prettier --write src",
-    "refresh": "yarn prisma generate",
-    "prebuild": "rm -rf .crypton && node scripts/prebuild.js",
-    "build": "tsc"
+    "start": "yarn node .crypton/index.js",
+    "dev": "echo 'Compiling...' && tsc && echo 'Compiling finished\nStarting Bot' && yarn node .crypton/index.js --dev",
+    "lint": " yarn eslint src && echo 'Linting Completed!'",
+    "lint:fix": "yarn eslint src --fix && echo 'Linting Completed!'",
+    "build": "rm -rf .crypton && tsc"
   },
   "dependencies": {
-    "@prisma/client": "^2.28.0",
-    "@sapphire/framework": "^2.0.0-next.4a3c76a6.0",
-    "discord.js": "^13.0.0-dev.t1627689836.ee3cdc8",
-    "dotenv": "^10.0.0"
+    "discord.js": "^13.0.1",
+    "dotenv": "^10.0.0",
+    "keyv": "^4.0.3",
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
+    "@types/node": "^16.4.13",
     "@types/node-fetch": "^2.5.11",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
     "eslint": "^7.31.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "prettier": "^2.3.2",
-    "prisma": "^2.28.0",
     "typescript": "^4.3.5"
   }
 }
