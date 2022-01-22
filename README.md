@@ -1,5 +1,8 @@
 # Crypton
 Crypton is a discord bot made in JS with discord.js and sapphire
+
+#THIS PROJECT HAS BEEN DISCONTINUED
+
 # Command
 The basic structure for a comamnd is as:
 ```ts
